@@ -242,6 +242,15 @@ body {
     cursor: not-allowed;
 }
 
+.choice-btn:focus {
+    outline: none;
+}
+
+.choice-btn:active:focus {
+    background: var(--bg-tertiary);
+    border-color: var(--border);
+}
+
 /* Relationships Panel */
 #relationships-panel {
     padding: 20px 40px;
@@ -382,6 +391,10 @@ body {
 
 /* Responsive Design */
 @media (max-width: 768px) {
+    body {
+        padding: 0;
+    }
+
     #title-screen h1 {
         font-size: 2.5rem;
     }
@@ -392,27 +405,96 @@ body {
 
     #game-container {
         border-radius: 0;
+        min-height: 100vh;
+    }
+
+    #game-screen {
+        min-height: 100vh;
+    }
+
+    #status-bar {
+        padding: 10px 15px;
+        flex-wrap: wrap;
+        gap: 10px;
     }
 
     #scene-container {
-        padding: 20px;
+        padding: 15px;
+        gap: 15px;
+        max-height: none;
+        overflow-y: visible;
+    }
+
+    #sprite-display {
+        min-height: 120px;
+        margin-bottom: 10px;
+    }
+
+    #sprite-display svg {
+        max-width: 200px;
+        max-height: 180px;
+    }
+
+    #scene-text {
+        font-size: 1rem;
+        padding: 15px;
+        line-height: 1.6;
     }
 
     #choices-container {
         flex-direction: column;
-        padding: 20px;
+        padding: 15px;
+        gap: 10px;
     }
 
     .choice-btn {
         min-width: 100%;
+        padding: 15px;
+        font-size: 0.95rem;
+    }
+
+    .choice-btn:hover {
+        transform: none;
+    }
+
+    .choice-btn:active {
+        background: var(--accent-secondary);
+        border-color: var(--accent-primary);
+    }
+
+    #relationships-panel {
+        padding: 15px;
+    }
+
+    #relationships-panel h3 {
+        font-size: 0.9rem;
+        margin-bottom: 10px;
     }
 
     .relationship-bar {
-        grid-template-columns: 80px 1fr 40px;
+        grid-template-columns: 70px 1fr 35px;
+        gap: 8px;
+        margin-bottom: 8px;
+    }
+
+    .rel-name {
+        font-size: 0.8rem;
+    }
+
+    .rel-value {
+        font-size: 0.8rem;
     }
 
     #ending-title {
         font-size: 1.8rem;
+    }
+
+    #ending-screen {
+        padding: 30px 20px;
+    }
+
+    #about-screen {
+        padding: 30px 20px;
     }
 }
 
