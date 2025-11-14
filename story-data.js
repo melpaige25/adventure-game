@@ -1292,13 +1292,43 @@ const StoryData = {
                 },
                 {
                     text: 'Keep it buried. This session is pointless.',
-                    next: 'ending_medicated',
+                    next: 'uni_medication_path',
                     relationships: { chen: -15 }
                 },
                 {
                     text: 'Delete the email. Close that door.',
                     next: 'ending_regret_early',
                     relationships: { mark: 10 }
+                }
+            ]
+        },
+
+        uni_medication_path: {
+            text: `Dr. Chen recommends medication. "Sometimes we need help managing the overwhelm," she says gently.
+
+            The prescription sits on your kitchen counter. Zoloft. 50mg.
+
+            Mark says, "Whatever helps."
+
+            The kids don't notice.
+
+            You stare at the bottle.`,
+            sprite: 'diane_worried',
+            choices: [
+                {
+                    text: 'Take the medication as prescribed.',
+                    next: 'ending_medicated',
+                    relationships: { chen: 10 }
+                },
+                {
+                    text: 'Take all of them at once.',
+                    next: 'ending_death_despair',
+                    relationships: { chen: -20, mark: -20, kids: -20 }
+                },
+                {
+                    text: 'Throw them away. Try something else.',
+                    next: 'uni_dr_chen_advice',
+                    relationships: { chen: 5 }
                 }
             ]
         },
@@ -1466,6 +1496,11 @@ const StoryData = {
                     text: 'Ask for help. See Dr. Chen.',
                     next: 'uni_therapy_continue',
                     relationships: { chen: 15 }
+                },
+                {
+                    text: 'Push harder. More coffee. Less sleep.',
+                    next: 'ending_death_coffee',
+                    relationships: { mark: -10, kids: -10 }
                 }
             ]
         },
