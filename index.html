@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crossroads - A Dark Comedy Adventure</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div id="game-container">
+        <!-- Title Screen -->
+        <div id="title-screen" class="screen active">
+            <h1>CROSSROADS</h1>
+            <p class="subtitle">A Dark Comedy About Second Chances</p>
+            <div class="title-buttons">
+                <button id="new-game-btn" class="menu-btn">New Game</button>
+                <button id="load-game-btn" class="menu-btn">Load Game</button>
+                <button id="about-btn" class="menu-btn">About</button>
+            </div>
+        </div>
+
+        <!-- Game Screen -->
+        <div id="game-screen" class="screen">
+            <!-- Status Bar -->
+            <div id="status-bar">
+                <div class="status-section">
+                    <span class="status-label">Chapter:</span>
+                    <span id="chapter-display">1</span>
+                </div>
+                <div class="status-section">
+                    <span class="status-label">Loop:</span>
+                    <span id="loop-display">0</span>
+                </div>
+                <button id="save-btn" class="icon-btn" title="Save Game">💾</button>
+                <button id="menu-btn" class="icon-btn" title="Menu">☰</button>
+            </div>
+
+            <!-- Scene Container -->
+            <div id="scene-container">
+                <div id="sprite-display"></div>
+                <div id="scene-text"></div>
+            </div>
+
+            <!-- Choices Container -->
+            <div id="choices-container">
+                <button class="choice-btn" data-choice="0"></button>
+                <button class="choice-btn" data-choice="1"></button>
+                <button class="choice-btn" data-choice="2"></button>
+            </div>
+
+            <!-- Relationships Panel -->
+            <div id="relationships-panel">
+                <h3>Relationships</h3>
+                <div class="relationship-bar">
+                    <span class="rel-name">Mark</span>
+                    <div class="rel-bar-container">
+                        <div class="rel-bar" id="rel-mark" style="width: 50%"></div>
+                    </div>
+                    <span class="rel-value" id="rel-mark-val">50</span>
+                </div>
+                <div class="relationship-bar">
+                    <span class="rel-name">Kids</span>
+                    <div class="rel-bar-container">
+                        <div class="rel-bar" id="rel-kids" style="width: 50%"></div>
+                    </div>
+                    <span class="rel-value" id="rel-kids-val">50</span>
+                </div>
+                <div class="relationship-bar">
+                    <span class="rel-name">Dr. Chen</span>
+                    <div class="rel-bar-container">
+                        <div class="rel-bar" id="rel-chen" style="width: 0%"></div>
+                    </div>
+                    <span class="rel-value" id="rel-chen-val">0</span>
+                </div>
+                <div class="relationship-bar">
+                    <span class="rel-name">Stephanie</span>
+                    <div class="rel-bar-container">
+                        <div class="rel-bar" id="rel-steph" style="width: 0%"></div>
+                    </div>
+                    <span class="rel-value" id="rel-steph-val">0</span>
+                </div>
+                <div class="relationship-bar">
+                    <span class="rel-name">Alex</span>
+                    <div class="rel-bar-container">
+                        <div class="rel-bar" id="rel-alex" style="width: 0%"></div>
+                    </div>
+                    <span class="rel-value" id="rel-alex-val">0</span>
+                </div>
+                <div class="relationship-bar">
+                    <span class="rel-name">James</span>
+                    <div class="rel-bar-container">
+                        <div class="rel-bar" id="rel-james" style="width: 0%"></div>
+                    </div>
+                    <span class="rel-value" id="rel-james-val">0</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Ending Screen -->
+        <div id="ending-screen" class="screen">
+            <div id="ending-content">
+                <h2 id="ending-title"></h2>
+                <div id="ending-sprite"></div>
+                <p id="ending-text"></p>
+                <div id="ending-stats"></div>
+                <div class="ending-buttons">
+                    <button id="restart-btn" class="menu-btn">Start Over</button>
+                    <button id="continue-loop-btn" class="menu-btn hidden">Continue Loop</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- About Screen -->
+        <div id="about-screen" class="screen">
+            <h2>About Crossroads</h2>
+            <p>Follow Diane, a 42-year-old mother standing at life's crossroads. Will she pursue academia, dive into marketing, or embrace the influencer lifestyle?</p>
+            <p>Your choices matter. Relationships evolve. Some paths lead to glory, others to... well, less desirable outcomes.</p>
+            <p class="hint">💀 Hint: Not all endings are permanent. Some loops are meant to be broken.</p>
+            <button id="back-btn" class="menu-btn">Back</button>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="sprites.js"></script>
+    <script src="story-data.js"></script>
+    <script src="game-engine.js"></script>
+</body>
+</html>
