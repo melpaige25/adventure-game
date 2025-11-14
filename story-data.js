@@ -1210,6 +1210,1206 @@ const StoryData = {
             sprite: 'mysterious_door',
             isEnding: true,
             allowsLoop: false
+        },
+
+        // ============================================
+        // MISSING UNIVERSITY PATH NODES
+        // ============================================
+        uni_mark_fight: {
+            text: `The argument escalates. Mark's voice raises. You don't back down.
+
+            "So now that you have a 'fancy' job offer, I'm what? Not good enough?"
+
+            "That's not what I'm saying!"
+
+            "Then what ARE you saying, Diane?"
+
+            The kids appear at the top of the stairs. Watching. Always watching.`,
+            sprite: 'mark',
+            choices: [
+                {
+                    text: 'Apologize. De-escalate.',
+                    next: 'uni_mark_negotiate',
+                    relationships: { mark: 15, kids: 10 }
+                },
+                {
+                    text: 'Stand your ground. This matters.',
+                    next: 'uni_leave_mark',
+                    relationships: { mark: -20, kids: -15 }
+                },
+                {
+                    text: 'Storm out. You need space.',
+                    next: 'ending_death_car',
+                    relationships: { mark: -30 }
+                }
+            ]
+        },
+
+        uni_leave_mark: {
+            text: `"I'm taking this job. With or without your support."
+
+            The words hang in the air. Mark's face goes pale, then red.
+
+            "Fine. Do whatever you want. You always do."
+
+            He grabs his keys and leaves. The kids retreat to their rooms.
+
+            You're alone in the kitchen. The coffee has gone cold.`,
+            sprite: 'diane_worried',
+            choices: [
+                {
+                    text: 'Call Dr. Chen. You need guidance.',
+                    next: 'uni_dr_chen_advice',
+                    relationships: { chen: 25 }
+                },
+                {
+                    text: 'Accept the job. File for divorce.',
+                    next: 'uni_divorce_path',
+                    relationships: { mark: -40, kids: -25 }
+                },
+                {
+                    text: 'Wait for Mark to cool down. Try to talk.',
+                    next: 'uni_counseling',
+                    relationships: { mark: -10 }
+                }
+            ]
+        },
+
+        uni_decline_help: {
+            text: `Dr. Chen doesn't push. She never does.
+
+            "Diane, whatever you're avoiding, it won't disappear on its own."
+
+            But you maintain the facade. Smile. Nod. Say you're fine.
+
+            The email from the university sits in your drafts. Reply: unsent.`,
+            sprite: 'dr_chen',
+            choices: [
+                {
+                    text: 'Finally open up. Tell her everything.',
+                    next: 'uni_dr_chen_advice',
+                    relationships: { chen: 15 }
+                },
+                {
+                    text: 'Keep it buried. This session is pointless.',
+                    next: 'ending_medicated',
+                    relationships: { chen: -15 }
+                },
+                {
+                    text: 'Delete the email. Close that door.',
+                    next: 'ending_regret_early',
+                    relationships: { mark: 10 }
+                }
+            ]
+        },
+
+        uni_more_time: {
+            text: `You ask the university for two weeks to decide. They agree.
+
+            The two weeks pass in a blur of sleepless nights and what-ifs.
+
+            Mark notices you're distant. "You're somewhere else lately."
+
+            He's right. You're living in two futures simultaneously.`,
+            sprite: 'diane_worried',
+            choices: [
+                {
+                    text: 'Accept the position. Leap.',
+                    next: 'uni_accept_job',
+                    relationships: { mark: -10 },
+                    setFlags: { acceptedProfessor: true }
+                },
+                {
+                    text: 'Decline. Safety over dreams.',
+                    next: 'ending_regret_early',
+                    relationships: { mark: 15, kids: 10 }
+                },
+                {
+                    text: 'Ask for part-time instead.',
+                    next: 'uni_part_time',
+                    relationships: { mark: 5 }
+                }
+            ]
+        },
+
+        uni_fear_work: {
+            text: `"I'm terrified," you admit to Dr. Chen. "What if I take the job and fail? What if I'm not good enough?"
+
+            "And what if you are?" she counters. "What if you're extraordinary?"
+
+            The possibility feels both thrilling and impossible.`,
+            sprite: 'dr_chen',
+            choices: [
+                {
+                    text: 'Take the job despite the fear.',
+                    next: 'uni_accept_job',
+                    relationships: { chen: 20 },
+                    setFlags: { acceptedProfessor: true }
+                },
+                {
+                    text: 'The fear wins. Stay safe.',
+                    next: 'ending_regret_early',
+                    relationships: { chen: -10, mark: 10 }
+                },
+                {
+                    text: 'Try part-time as a compromise.',
+                    next: 'uni_part_time',
+                    relationships: { chen: 10 }
+                }
+            ]
+        },
+
+        uni_part_time: {
+            text: `The university agrees to 15 hours per week. Two classes. Office hours on Tuesdays.
+
+            It's manageable. Mark relaxes. The kids adjust.
+
+            But three months in, you realize: this is a taste of what you really want. And tastes make you hungry.`,
+            sprite: 'classroom',
+            choices: [
+                {
+                    text: 'Request full-time. You want more.',
+                    next: 'uni_accept_job',
+                    relationships: { mark: -15 },
+                    setFlags: { acceptedProfessor: true }
+                },
+                {
+                    text: 'Stay part-time. This is enough.',
+                    next: 'ending_professor_independent',
+                    relationships: { mark: 20, kids: 15 }
+                },
+                {
+                    text: 'Meet Professor James. Build connections.',
+                    next: 'uni_james_coffee',
+                    relationships: { james: 10 }
+                }
+            ]
+        },
+
+        uni_trial_period: {
+            text: `"One year," Mark agrees. "If it's too much, you quit."
+
+            You take the job. One year to prove yourself.
+
+            Six months in, you're thriving. Publishing. Teaching. Alive.
+
+            But Mark is drowning. Dinner. Laundry. Homework. He never realized how much you did.`,
+            sprite: 'home',
+            choices: [
+                {
+                    text: 'Hire help. Use your salary to ease the burden.',
+                    next: 'uni_accept_job',
+                    relationships: { mark: 10 }
+                },
+                {
+                    text: 'Pull back. Family first.',
+                    next: 'ending_professor_independent',
+                    relationships: { mark: 20, kids: 15 }
+                },
+                {
+                    text: 'Suggest marriage counseling.',
+                    next: 'uni_counseling',
+                    relationships: { mark: 5 }
+                }
+            ]
+        },
+
+        uni_balance_family: {
+            text: `You decline James's invitation. Race to pick up the kids.
+
+            Emma has a science project due tomorrow. Connor needs new cleats. Mark forgot to go grocery shopping.
+
+            You juggle it all. But the weight is crushing.
+
+            A text from James: "Missed you today. Coffee tomorrow?"`,
+            sprite: 'kids',
+            choices: [
+                {
+                    text: 'Make time for coffee. You need intellectual stimulation.',
+                    next: 'uni_james_coffee',
+                    relationships: { james: 15, kids: -5 }
+                },
+                {
+                    text: 'Keep declining. Family comes first.',
+                    next: 'uni_juggle_life',
+                    relationships: { kids: 15, james: -10 }
+                },
+                {
+                    text: 'Talk to Mark about dividing responsibilities.',
+                    next: 'uni_counseling',
+                    relationships: { mark: 5 }
+                }
+            ]
+        },
+
+        uni_juggle_life: {
+            text: `You become a master juggler. Work. Kids. Marriage. All the balls in the air.
+
+            None of them drop. But you're exhausted.
+
+            A year in, you're promoted. Tenure track. Success.
+
+            But at what cost?`,
+            sprite: 'diane_worried',
+            choices: [
+                {
+                    text: 'This is the price of success. Accept it.',
+                    next: 'ending_professor_independent',
+                    relationships: { kids: 10, mark: 10 }
+                },
+                {
+                    text: 'Something has to give. Quit the job.',
+                    next: 'ending_regret_early',
+                    relationships: { mark: 20, kids: 20 }
+                },
+                {
+                    text: 'Ask for help. See Dr. Chen.',
+                    next: 'uni_therapy_continue',
+                    relationships: { chen: 15 }
+                }
+            ]
+        },
+
+        uni_therapy_continue: {
+            text: `Dr. Chen becomes your anchor. Weekly sessions to process the overwhelm.
+
+            "You're trying to be everything to everyone," she observes. "When do you get to just be Diane?"
+
+            The question breaks something open in you.`,
+            sprite: 'dr_chen',
+            choices: [
+                {
+                    text: 'Prioritize yourself for once.',
+                    next: 'ending_professor_independent',
+                    relationships: { chen: 25, mark: 5 }
+                },
+                {
+                    text: 'Admit you need to scale back.',
+                    next: 'uni_part_time',
+                    relationships: { chen: 15 }
+                },
+                {
+                    text: 'Realize you need to leave Mark.',
+                    next: 'uni_divorce_path',
+                    relationships: { chen: 20, mark: -30 }
+                }
+            ]
+        },
+
+        uni_establish_boundaries: {
+            text: `You set clear boundaries. Work hours are work hours. Family time is family time.
+
+            Mark grumbles but adapts. The kids learn independence.
+
+            You find balance. Not perfect, but real.
+
+            James respects your boundaries. The connection remains professional. Mostly.`,
+            sprite: 'office',
+            choices: [
+                {
+                    text: 'This balance works. Maintain it.',
+                    next: 'ending_professor_independent',
+                    relationships: { mark: 15, kids: 15, james: 10 }
+                },
+                {
+                    text: 'Realize you want more with James.',
+                    next: 'uni_honest_conversation',
+                    relationships: { james: 20, mark: -10 }
+                },
+                {
+                    text: 'Focus entirely on career.',
+                    next: 'ending_professor_happiness',
+                    relationships: { james: 15, mark: -20 }
+                }
+            ]
+        },
+
+        uni_marriage_crisis: {
+            text: `You leave James's office at midnight. Forty-seven missed calls from Mark.
+
+            When you get home, he's waiting. "Where were you?"
+
+            "Working."
+
+            "Bullshit."
+
+            He knows. Somehow, he knows.`,
+            sprite: 'mark',
+            choices: [
+                {
+                    text: 'Confess everything.',
+                    next: 'uni_divorce_path',
+                    relationships: { mark: -40, james: -20 }
+                },
+                {
+                    text: 'Lie convincingly.',
+                    next: 'ending_professor_regret',
+                    relationships: { mark: -20 }
+                },
+                {
+                    text: 'Suggest counseling immediately.',
+                    next: 'uni_counseling',
+                    relationships: { mark: -10 }
+                }
+            ]
+        },
+
+        uni_divorce_path: {
+            text: `The divorce takes eight months. Mark gets the house. You get every other weekend with the kids.
+
+            You move into a small apartment near campus. Books floor to ceiling. Freedom and loneliness in equal measure.
+
+            James invites you to dinner. "No pressure. Just... company."`,
+            sprite: 'office',
+            choices: [
+                {
+                    text: 'Accept. Build something new.',
+                    next: 'ending_professor_happiness',
+                    relationships: { james: 40, kids: -20 }
+                },
+                {
+                    text: 'Decline. You need to be alone.',
+                    next: 'ending_professor_independent',
+                    relationships: { james: -10, kids: 10 }
+                },
+                {
+                    text: 'Focus on rebuilding with your kids.',
+                    next: 'ending_professor_independent',
+                    relationships: { kids: 20, james: -15 }
+                }
+            ]
+        },
+
+        uni_counseling: {
+            text: `Couples therapy. Wednesday nights at 7 PM.
+
+            The therapist asks hard questions. Mark reveals resentments you never knew existed. You share fears you've never voiced.
+
+            It's painful. Necessary. Possibly too late.`,
+            sprite: 'office',
+            choices: [
+                {
+                    text: 'Commit fully. Fight for the marriage.',
+                    next: 'ending_professor_independent',
+                    relationships: { mark: 25, kids: 15 }
+                },
+                {
+                    text: 'Realize it\'s over. Divorce gently.',
+                    next: 'uni_divorce_path',
+                    relationships: { mark: -20, kids: -10 }
+                },
+                {
+                    text: 'Take a break. Need space to think.',
+                    next: 'ending_professor_regret',
+                    relationships: { mark: -15 }
+                }
+            ]
+        },
+
+        // ============================================
+        // MISSING MARKETING PATH NODES
+        // ============================================
+        market_professional: {
+            text: `You keep it strictly professional. Alex is a colleague. Nothing more.
+
+            Months pass. Projects succeed. You're promoted.
+
+            But late at night, you wonder: what if?`,
+            sprite: 'office',
+            choices: [
+                {
+                    text: 'This is the right choice. Stay professional.',
+                    next: 'ending_marketing_sacrifice',
+                    relationships: { alex: -10, steph: 20, mark: 10 }
+                },
+                {
+                    text: 'Realize you have feelings. Address them.',
+                    next: 'market_alex_friends',
+                    relationships: { alex: 15 }
+                },
+                {
+                    text: 'Focus entirely on career success.',
+                    next: 'ending_marketing_sacrifice',
+                    relationships: { steph: 25, mark: 5 }
+                }
+            ]
+        },
+
+        market_avoid_alex: {
+            text: `You actively avoid Alex. Different lunch times. Minimal meetings.
+
+            He notices. "Did I do something wrong?"
+
+            "No. I just... I need to focus on work."
+
+            He looks hurt but nods. The distance grows.`,
+            sprite: 'alex',
+            choices: [
+                {
+                    text: 'Maintain distance. This is safer.',
+                    next: 'market_professional',
+                    relationships: { alex: -15, mark: 10 }
+                },
+                {
+                    text: 'Apologize. Explain you felt something.',
+                    next: 'market_alex_boundaries',
+                    relationships: { alex: 10 }
+                },
+                {
+                    text: 'Request a transfer to different department.',
+                    next: 'ending_marketing_sacrifice',
+                    relationships: { alex: -20, steph: -10 }
+                }
+            ]
+        },
+
+        market_alex_boundaries: {
+            text: `"I felt something," you admit. "And I can't. I'm married. I have kids."
+
+            Alex nods slowly. "I respect that. Can we still be friends? Real friends?"
+
+            It's harder than it sounds. But maybe possible.`,
+            sprite: 'alex',
+            choices: [
+                {
+                    text: 'Yes. Genuine friendship.',
+                    next: 'ending_marketing_sacrifice',
+                    relationships: { alex: 15, mark: 5 }
+                },
+                {
+                    text: 'No. Too dangerous.',
+                    next: 'market_professional',
+                    relationships: { alex: -10, mark: 10 }
+                },
+                {
+                    text: 'Realize you want to leave Mark.',
+                    next: 'market_confession',
+                    relationships: { alex: 20, mark: -30 }
+                }
+            ]
+        },
+
+        market_alex_deflect: {
+            text: `You make a joke. He laughs. The moment passes.
+
+            But the tension remains. Unspoken. Growing.
+
+            Three months later, drunk at a company party, he asks: "Did you feel it too?"`,
+            sprite: 'alex',
+            choices: [
+                {
+                    text: 'Admit it. "Yes. I felt it."',
+                    next: 'market_alex_kiss',
+                    relationships: { alex: 25, mark: -15 }
+                },
+                {
+                    text: 'Lie. "I don\'t know what you mean."',
+                    next: 'market_professional',
+                    relationships: { alex: -15 }
+                },
+                {
+                    text: 'Leave the party. This is too much.',
+                    next: 'ending_marketing_sacrifice',
+                    relationships: { alex: -10, mark: 5 }
+                }
+            ]
+        },
+
+        market_alex_end_early: {
+            text: `You go home. Mark is asleep. The kids are asleep. Everything looks normal.
+
+            But you're not normal anymore. Something shifted tonight.
+
+            You can't unring this bell.`,
+            sprite: 'home',
+            choices: [
+                {
+                    text: 'Quit the job. Remove the temptation.',
+                    next: 'ending_marketing_return',
+                    relationships: { alex: -30, steph: -30, mark: 15 }
+                },
+                {
+                    text: 'Set strict boundaries with Alex.',
+                    next: 'market_alex_boundaries',
+                    relationships: { alex: -10, mark: 5 }
+                },
+                {
+                    text: 'Confess to Mark. Honesty matters.',
+                    next: 'market_confession',
+                    relationships: { mark: -30, alex: -15 }
+                }
+            ]
+        },
+
+        market_alex_guilty: {
+            text: `"This is wrong," you say, pulling away. "I'm sorry. I can't."
+
+            Alex looks devastated but nods. "I understand."
+
+            You leave. Drive home crying. Mark asks if you're okay.
+
+            "Just stressed," you lie.`,
+            sprite: 'diane_worried',
+            choices: [
+                {
+                    text: 'End all contact with Alex.',
+                    next: 'market_professional',
+                    relationships: { alex: -20, mark: 5 }
+                },
+                {
+                    text: 'Tell Mark what almost happened.',
+                    next: 'market_confession',
+                    relationships: { mark: -20, alex: -10 }
+                },
+                {
+                    text: 'See a therapist. Process this.',
+                    next: 'market_mark_talk',
+                    relationships: { chen: 15, mark: 5 }
+                }
+            ]
+        },
+
+        market_breakup_alex: {
+            text: `"Detroit is a huge opportunity," you tell Alex. "But we need to end this. It's not fair to anyone."
+
+            He argues. Begs. Promises to wait.
+
+            But you're firm. This has to stop.`,
+            sprite: 'alex',
+            choices: [
+                {
+                    text: 'Go to Detroit. Focus on career.',
+                    next: 'ending_marketing_sacrifice',
+                    relationships: { alex: -30, steph: 25, mark: 5 }
+                },
+                {
+                    text: 'Decline Detroit. Save your marriage.',
+                    next: 'ending_marketing_return',
+                    relationships: { alex: -20, steph: -15, mark: 15 }
+                },
+                {
+                    text: 'Realize you love Alex. Change your mind.',
+                    next: 'market_detroit',
+                    relationships: { alex: 30, mark: -30 }
+                }
+            ]
+        },
+
+        market_confession: {
+            text: `"Mark, I need to tell you something."
+
+            You confess. Everything. The attraction. The kiss. The affair.
+
+            He sits in silence for five full minutes.
+
+            Then: "Get out."`,
+            sprite: 'mark',
+            choices: [
+                {
+                    text: 'Fight for the marriage. Beg forgiveness.',
+                    next: 'ending_marketing_sacrifice',
+                    relationships: { mark: -30, alex: -20 }
+                },
+                {
+                    text: 'Leave. Go to Alex.',
+                    next: 'ending_marketing_love',
+                    relationships: { mark: -50, alex: 30 }
+                },
+                {
+                    text: 'Give Mark space. File for divorce.',
+                    next: 'ending_marketing_sacrifice',
+                    relationships: { mark: -40, kids: -30 }
+                }
+            ]
+        },
+
+        market_family_first: {
+            text: `You skip the drinks. Go home to Mark and the kids.
+
+            Stephanie is disappointed. "We're a team here. Team-building matters."
+
+            But you made your choice. Family first.
+
+            Two months later, you're passed over for a promotion. Stephanie: "We need commitment."`,
+            sprite: 'home',
+            choices: [
+                {
+                    text: 'Accept it. Family is worth more.',
+                    next: 'ending_marketing_return',
+                    relationships: { steph: -15, mark: 20, kids: 15 }
+                },
+                {
+                    text: 'Fight back. Prove your value.',
+                    next: 'market_professional',
+                    relationships: { steph: 10, mark: -5 }
+                },
+                {
+                    text: 'Quit. Find a better work-life balance.',
+                    next: 'ending_marketing_return',
+                    relationships: { steph: -25, mark: 20 }
+                }
+            ]
+        },
+
+        market_negotiate: {
+            text: `Stephanie considers. "Two days remote. But you're in office for all client meetings. Deal?"
+
+            You agree. It's a compromise that works.
+
+            The job succeeds. Your marriage stabilizes. You find balance.
+
+            Then you meet Alex.`,
+            sprite: 'stephanie',
+            choices: [
+                {
+                    text: 'Keep it professional with Alex.',
+                    next: 'market_professional',
+                    relationships: { steph: 15, mark: 15 }
+                },
+                {
+                    text: 'Let the friendship develop.',
+                    next: 'market_alex_friends',
+                    relationships: { alex: 15, mark: 5 }
+                },
+                {
+                    text: 'Focus solely on work success.',
+                    next: 'ending_marketing_sacrifice',
+                    relationships: { steph: 25 }
+                }
+            ]
+        },
+
+        market_mark_talk: {
+            text: `"Mark, I need to talk about something."
+
+            You tell him you're struggling. Not the whole truth, but some of it. The stress. The temptation. The confusion.
+
+            He listens. Really listens.
+
+            "Maybe we should see someone. Together."`,
+            sprite: 'mark',
+            choices: [
+                {
+                    text: 'Agree to counseling. Work on the marriage.',
+                    next: 'ending_marketing_sacrifice',
+                    relationships: { mark: 20, alex: -15 }
+                },
+                {
+                    text: 'Admit you have feelings for someone else.',
+                    next: 'market_confession',
+                    relationships: { mark: -30 }
+                },
+                {
+                    text: 'Decide to quit the job.',
+                    next: 'ending_marketing_return',
+                    relationships: { mark: 25, alex: -20 }
+                }
+            ]
+        },
+
+        market_mark_insecure: {
+            text: `"If it makes you uncomfortable, I won't apply."
+
+            Relief floods Mark's face. But also... guilt?
+
+            "No, I didn't say that. I just... I don't know."
+
+            The moment reveals something fundamental about your marriage.`,
+            sprite: 'mark',
+            choices: [
+                {
+                    text: 'Take the job anyway. You need this.',
+                    next: 'market_interview',
+                    relationships: { mark: -15 }
+                },
+                {
+                    text: 'Decline the job. Peace at home matters.',
+                    next: 'ending_regret_early',
+                    relationships: { mark: 20 }
+                },
+                {
+                    text: 'Suggest marriage counseling first.',
+                    next: 'ending_marketing_return',
+                    relationships: { mark: 10 }
+                }
+            ]
+        },
+
+        // ============================================
+        // MISSING INFLUENCER PATH NODES
+        // ============================================
+        influencer_kids_input: {
+            text: `"Mom wants to know if we want to be homeschooled and travel the world," you announce.
+
+            Emma's eyes light up. Connor looks terrified.
+
+            "What about baseball?" Connor asks.
+
+            "What about EVERYTHING?" Emma counters.`,
+            sprite: 'kids',
+            choices: [
+                {
+                    text: 'Let them vote. Democracy.',
+                    next: 'influencer_kids_win',
+                    relationships: { kids: 20 }
+                },
+                {
+                    text: 'Explain it\'s your decision.',
+                    next: 'influencer_big_pitch',
+                    relationships: { kids: -5, mark: -5 }
+                },
+                {
+                    text: 'Start smaller. Just the influencer part.',
+                    next: 'influencer_start_small',
+                    relationships: { kids: 10 }
+                }
+            ]
+        },
+
+        influencer_kids_win: {
+            text: `They vote. Emma: yes. Connor: hesitant yes, if he can still play baseball somehow.
+
+            Mark outvoted, sighs. "I guess we're doing this."
+
+            You're going all in. Family adventure. No safety net.`,
+            sprite: 'kids',
+            choices: [
+                {
+                    text: 'Start immediately. Launch the channel.',
+                    next: 'influencer_trial',
+                    relationships: { kids: 25, mark: -10 },
+                    setFlags: { acceptedInfluencer: true }
+                },
+                {
+                    text: 'Plan carefully. This is huge.',
+                    next: 'influencer_big_pitch',
+                    relationships: { mark: 10 }
+                },
+                {
+                    text: 'Test the waters first.',
+                    next: 'influencer_start_small',
+                    relationships: { mark: 15 }
+                }
+            ]
+        },
+
+        influencer_mark_input: {
+            text: `You show Mark the email. The earning potential. The lifestyle flexibility.
+
+            "You want to be an... influencer?" The distaste in his voice is palpable.
+
+            "I want to work from anywhere. Be present with the kids. Make real money."
+
+            He's skeptical. Very skeptical.`,
+            sprite: 'mark',
+            choices: [
+                {
+                    text: 'Convince him with data and research.',
+                    next: 'influencer_convince_mark',
+                    relationships: { mark: 10 }
+                },
+                {
+                    text: 'Do it anyway. Your choice.',
+                    next: 'influencer_start_small',
+                    relationships: { mark: -15 }
+                },
+                {
+                    text: 'Respect his concerns. Discuss together.',
+                    next: 'influencer_big_pitch',
+                    relationships: { mark: 15 }
+                }
+            ]
+        },
+
+        influencer_convince_mark: {
+            text: `You show him successful mom influencers. Their income reports. Their lifestyles.
+
+            Mark slowly comes around. "If you can make even $2K a month..."
+
+            "I can do more than that."
+
+            You hope you're right.`,
+            sprite: 'diane_happy',
+            choices: [
+                {
+                    text: 'Launch immediately. Strike while iron\'s hot.',
+                    next: 'influencer_trial',
+                    relationships: { mark: 15 },
+                    setFlags: { acceptedInfluencer: true }
+                },
+                {
+                    text: 'Take it slow. Build sustainably.',
+                    next: 'influencer_slow_growth',
+                    relationships: { mark: 20 }
+                },
+                {
+                    text: 'Get the kids involved in planning.',
+                    next: 'influencer_kids_win',
+                    relationships: { kids: 20, mark: 10 }
+                }
+            ]
+        },
+
+        influencer_start_small: {
+            text: `You start posting without fanfare. Philosophy tips for parents. Funny moments. Real life.
+
+            After three months: 10K followers. First sponsorship: $500.
+
+            Mark is impressed. "Maybe this could work."
+
+            The kids are getting used to the camera.`,
+            sprite: 'diane_happy',
+            choices: [
+                {
+                    text: 'Scale up. Go full-time influencer.',
+                    next: 'influencer_trial',
+                    relationships: { mark: 10, kids: 10 },
+                    setFlags: { acceptedInfluencer: true }
+                },
+                {
+                    text: 'Keep it as side income. Safe choice.',
+                    next: 'influencer_slow_growth',
+                    relationships: { mark: 20 }
+                },
+                {
+                    text: 'Pitch the travel component.',
+                    next: 'influencer_bali_discuss',
+                    relationships: { kids: 15 }
+                }
+            ]
+        },
+
+        influencer_slow_growth: {
+            text: `You grow slowly but steadily. 50K followers after a year. $5K/month consistent income.
+
+            The kids stay in school. Mark keeps his job. You have the best of both worlds.
+
+            It's not the adventure you imagined. But it's good. Real good.`,
+            sprite: 'home',
+            choices: [
+                {
+                    text: 'This is enough. Be content.',
+                    next: 'ending_influencer_compromise',
+                    relationships: { mark: 25, kids: 20 }
+                },
+                {
+                    text: 'Dream bigger. Pitch the travel.',
+                    next: 'influencer_bali_discuss',
+                    relationships: { kids: 15, mark: -5 }
+                },
+                {
+                    text: 'Scale up to full-time.',
+                    next: 'influencer_trial',
+                    relationships: { mark: 5 },
+                    setFlags: { acceptedInfluencer: true }
+                }
+            ]
+        },
+
+        influencer_community: {
+            text: `You join homeschool groups. Talk to traveling families. The community is real and supportive.
+
+            One mom, Sarah, tells you: "Best decision we ever made. The kids are thriving."
+
+            Another: "It's harder than it looks. Be prepared."
+
+            Both are right.`,
+            sprite: 'cafe',
+            choices: [
+                {
+                    text: 'Go for it. Jump in.',
+                    next: 'influencer_big_pitch',
+                    relationships: { kids: 15 }
+                },
+                {
+                    text: 'Start small. Test the waters.',
+                    next: 'influencer_start_small',
+                    relationships: { mark: 10 }
+                },
+                {
+                    text: 'Too risky. Traditional path instead.',
+                    next: 'ending_regret_early',
+                    relationships: { mark: 15 }
+                }
+            ]
+        },
+
+        influencer_bali_discuss: {
+            text: `"There's an opportunity to go to Bali. All expenses paid. Three weeks. Educational content."
+
+            Mark's face: skeptical.
+
+            Emma: "PLEASE!"
+
+            Connor: "Will there be beaches?"
+
+            The family is divided.`,
+            sprite: 'kids',
+            choices: [
+                {
+                    text: 'Go as a family. All or nothing.',
+                    next: 'influencer_family_travel',
+                    relationships: { kids: 30, mark: -20 }
+                },
+                {
+                    text: 'Go with just the kids.',
+                    next: 'influencer_bali',
+                    relationships: { kids: 25, mark: -15 }
+                },
+                {
+                    text: 'Decline. Not worth the conflict.',
+                    next: 'influencer_slow_growth',
+                    relationships: { mark: 15, kids: -10 }
+                }
+            ]
+        },
+
+        influencer_family_travel: {
+            text: `Mark quits his job. The four of you board a plane to Bali.
+
+            It's terrifying. Exhilarating. The kids are wide-eyed.
+
+            Mark whispers, "I hope you're right about this."
+
+            So do you.`,
+            sprite: 'airport',
+            choices: [
+                {
+                    text: 'Make it work. This is your new life.',
+                    next: 'ending_influencer_free',
+                    relationships: { kids: 40, mark: 10 }
+                },
+                {
+                    text: 'Return after three weeks. It was an adventure.',
+                    next: 'ending_influencer_compromise',
+                    relationships: { kids: 25, mark: 20 }
+                },
+                {
+                    text: 'Extend the trip. Keep exploring.',
+                    next: 'influencer_extend_travel',
+                    relationships: { kids: 35, mark: -10 }
+                }
+            ]
+        },
+
+        influencer_return_home: {
+            text: `You return home after three weeks. Mark is grateful. The kids are changed.
+
+            "Can we go back someday?" Emma asks.
+
+            "Maybe," you say. "Someday."
+
+            You've had your taste of freedom. It'll have to be enough.`,
+            sprite: 'home',
+            choices: [
+                {
+                    text: 'Be content with this life.',
+                    next: 'ending_influencer_compromise',
+                    relationships: { mark: 25, kids: 15 }
+                },
+                {
+                    text: 'Plan another trip soon.',
+                    next: 'influencer_slow_growth',
+                    relationships: { kids: 20 }
+                },
+                {
+                    text: 'Realize you need more. Always.',
+                    next: 'influencer_extend_travel',
+                    relationships: { mark: -15, kids: 25 }
+                }
+            ]
+        },
+
+        influencer_virtual_therapy: {
+            text: `Dr. Chen appears on your laptop screen from Tokyo. Mark dials in from home.
+
+            "So," Dr. Chen begins, "tell me about your current arrangement."
+
+            Mark: "My wife and kids have been traveling for six months."
+
+            You: "We're building a life."
+
+            Dr. Chen: "Are you building it together?"`,
+            sprite: 'dr_chen',
+            choices: [
+                {
+                    text: 'Commit to coming home. Save the marriage.',
+                    next: 'ending_influencer_compromise',
+                    relationships: { mark: 20, kids: -15, chen: 15 }
+                },
+                {
+                    text: 'Ask Mark to join you permanently.',
+                    next: 'influencer_family_travel',
+                    relationships: { mark: -10, kids: 30 }
+                },
+                {
+                    text: 'Admit the marriage is over.',
+                    next: 'ending_influencer_free',
+                    relationships: { mark: -40, kids: 35, chen: 10 }
+                }
+            ]
+        },
+
+        // ============================================
+        // MISSING FOURTH PATH NODES
+        // ============================================
+        fourth_path_mark_reaction: {
+            text: `"Mark, do you see that door?"
+
+            He looks where you're pointing. "What door?"
+
+            He doesn't see it. Only you can see it.
+
+            The door pulses with light. Calling you.`,
+            sprite: 'mysterious_door',
+            choices: [
+                {
+                    text: 'Open the door anyway.',
+                    next: 'fourth_path_enter',
+                    setFlags: { doorUnlocked: true }
+                },
+                {
+                    text: 'Ignore it. Choose reality.',
+                    next: 'start'
+                },
+                {
+                    text: 'Question your sanity.',
+                    next: 'ending_medicated'
+                }
+            ]
+        },
+
+        fourth_path_not_dead: {
+            text: `"Am I dead?" you ask your other self.
+
+            "No. You're more alive than you've ever been. You're seeing what most people never see: the infinite possibilities of existence."
+
+            She sips her coffee. It smells real.
+
+            "You've died enough times to break through the illusion. Now you get to choose: really choose."`,
+            sprite: 'diane_happy',
+            choices: [
+                {
+                    text: 'Ask what the illusion is.',
+                    next: 'fourth_path_explanation'
+                },
+                {
+                    text: 'Ask who she is.',
+                    next: 'fourth_path_who'
+                },
+                {
+                    text: 'Ask what happens now.',
+                    next: 'fourth_path_self'
+                }
+            ]
+        },
+
+        fourth_path_who: {
+            text: `"I'm you. The you who stopped choosing based on fear or duty or what others expect."
+
+            She stands. Gestures to the shifting space.
+
+            "I'm the you who realized: existence precedes essence. You are not your roles. Not wife, not mother, not professional. You are choice itself."`,
+            sprite: 'diane_happy',
+            choices: [
+                {
+                    text: 'Accept this truth.',
+                    next: 'fourth_path_explanation'
+                },
+                {
+                    text: 'Reject it. Too strange.',
+                    next: 'start'
+                },
+                {
+                    text: 'Ask how to become her.',
+                    next: 'fourth_path_self'
+                }
+            ]
+        },
+
+        fourth_path_happy: {
+            text: `"Happiness is a byproduct, not a goal," your other self says. "When you choose authentically, happiness follows. Sometimes."
+
+            "That's not very reassuring."
+
+            "It's honest. And honesty is what you've been avoiding, isn't it?"
+
+            The room shifts. You see moments from your loops. Every compromise. Every fear-based choice.`,
+            sprite: 'diane_worried',
+            choices: [
+                {
+                    text: 'Admit she\'s right.',
+                    next: 'fourth_path_self'
+                },
+                {
+                    text: 'Defend your choices.',
+                    next: 'fourth_path_others'
+                },
+                {
+                    text: 'Ask for another chance.',
+                    next: 'ending_fourth_path_freedom'
+                }
+            ]
+        },
+
+        fourth_path_others: {
+            text: `"I choose for others because I love them," you argue.
+
+            "Do you? Or do you choose for them because it's easier than facing who you are without them?"
+
+            The words hit hard.
+
+            "Your kids will grow. Mark could meet someone else. Dr. Chen will retire. Then who are you?"`,
+            sprite: 'diane_worried',
+            choices: [
+                {
+                    text: 'I\'m still me.',
+                    next: 'fourth_path_self'
+                },
+                {
+                    text: 'I don\'t know anymore.',
+                    next: 'fourth_path_explanation'
+                },
+                {
+                    text: 'I need to start over.',
+                    next: 'ending_fourth_path_freedom'
+                }
+            ]
+        },
+
+        // ============================================
+        // MISSING ENDING NODES
+        // ============================================
+        ending_professor_regret: {
+            title: '😔 The Compromise',
+            text: `You stay with Mark. End things with James. Focus on being a good professor, wife, and mother.
+
+            You succeed at all three. From the outside, your life looks perfect.
+
+            From the inside, you remember that moment in James's office. The possibility of something more.
+
+            Five years later, James marries someone else. You attend the wedding. Smile. Congratulate him.
+
+            That night, you dream of a different life. You always will.`,
+            sprite: 'diane_worried',
+            isEnding: true,
+            allowsLoop: false
+        },
+
+        ending_marketing_return: {
+            title: '🏠 The Safe Harbor',
+            text: `You quit the marketing agency. Return to being a stay-at-home mom.
+
+            Mark is relieved. The kids adjust. Life returns to normal.
+
+            You still see Alex's face sometimes. Hear his laugh. Wonder what if.
+
+            But you chose safety. Stability. Family.
+
+            Whether that's noble or tragic depends on the day you ask.`,
+            sprite: 'home',
+            isEnding: true,
+            allowsLoop: false
         }
     }
 };

@@ -184,11 +184,14 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    min-height: 200px;
+    min-height: 150px;
+    max-height: 250px;
+    flex-shrink: 0;
 }
 
 #sprite-display svg {
-    max-width: 400px;
+    max-width: 300px;
+    max-height: 250px;
     width: 100%;
     height: auto;
     filter: drop-shadow(0 5px 15px rgba(0, 0, 0, 0.3));
