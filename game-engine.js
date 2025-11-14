@@ -154,6 +154,11 @@ class GameEngine {
 
         const choice = node.choices[choiceIndex];
 
+        // Remove focus from all buttons to prevent highlight persisting
+        document.querySelectorAll('.choice-btn').forEach(btn => {
+            btn.blur();
+        });
+
         // Apply relationship changes
         if (choice.relationships) {
             this.applyRelationshipChanges(choice.relationships);
@@ -295,6 +300,14 @@ class GameEngine {
 
         // Update relationships
         this.updateAllRelationships();
+
+        // Scroll to scene text on mobile to ensure it's visible
+        setTimeout(() => {
+            const sceneText = document.getElementById('scene-text');
+            if (sceneText) {
+                sceneText.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+        }, 100);
     }
 
     // Process dynamic text
