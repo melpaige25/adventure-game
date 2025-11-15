@@ -5,7 +5,11 @@ class GameEngine {
         this.chapter = 1;
         this.loopCount = 0;
         this.visitedNodes = new Set();
-        this.discoveredEndings = new Set();
+
+        // Load discovered endings from localStorage to persist across sessions
+        const savedEndings = localStorage.getItem('crossroads_discovered_endings');
+        this.discoveredEndings = savedEndings ? new Set(JSON.parse(savedEndings)) : new Set();
+
         this.relationships = {
             mark: 50,
             kids: 50,
@@ -94,7 +98,8 @@ class GameEngine {
     // Restart completely
     restart() {
         this.loopCount = 0;
-        this.discoveredEndings = new Set();
+        // Don't reset discoveredEndings - keep the player's collection across restarts
+        // discoveredEndings persists in localStorage automatically
         this.newGame();
     }
 
@@ -328,6 +333,9 @@ class GameEngine {
         if (!ending) return;
 
         this.discoveredEndings.add(endingNode);
+
+        // Auto-save discovered endings to localStorage so they persist across sessions
+        localStorage.setItem('crossroads_discovered_endings', JSON.stringify(Array.from(this.discoveredEndings)));
 
         document.getElementById('ending-title').textContent = ending.title;
         document.getElementById('ending-text').innerHTML = ending.text;
